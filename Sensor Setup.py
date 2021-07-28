@@ -1,7 +1,9 @@
 # imports
 import displayio
+import board
 import terminalio
 from adafruit_clue import clue
+# from fileName import className
 
 # QUESTIONS
     # How do we set up the code for an external or already on the board sensor?
@@ -14,6 +16,12 @@ from adafruit_clue import clue
 # accelerometer (on board) (back of bike)
     # sense when there is a sudden change in speed --> sends signal for brake lights to breadboard on back of bike
     # in conjunction with gyroscope, sense collisions/falls
+x, y, z = clue.acceleration
+menu_screen = board.DISPLAY
+acceleration_label = label.Label(terminalio.FONT, text="x,y,x", scale=1, color=0x000000)
+menu_screen.append(acceleration_label)
+# - always need a loop function
+# if x > value: (2g's of force):
 
 
 
