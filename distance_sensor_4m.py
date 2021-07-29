@@ -9,16 +9,20 @@ class DistanceSensor4M:
     # distance sensor returns in millimeters
 
 
-    distanceMM = 0
-
+    distanceMM = -1
+    ToF = QwiicVL53L1X(clue._i2c)
+    ToF.sensor_init()
 
     def get_distance_millimeters(self):
-        ToF = QwiicVL53L1X(clue._i2c)
-        ToF.start_ranging()	# Write configuration bytes to initiate measurement
+        # ToF = QwiicVL53L1X(clue._i2c)
+        # ToF.sensor_init()
+        #if (ToF.sensor_init() == None):					 # Begin returns 0 on a good init
+         #   print("Sensor online!\n")
+        self.ToF.start_ranging()	# Write configuration bytes to initiate measurement
         time.sleep(.005)
-        self.distanceMM = ToF.get_distance() # Get the result of the measurement from the sensor
+        self.distanceMM = self.ToF.get_distance() # Get the result of the measurement from the sensor
         time.sleep(.005)
-        ToF.stop_ranging()
+        self.ToF.stop_ranging()
         #distanceInches = self.distanceMM / 25.4
         #distanceFeet = distanceInches / 12.0
         #print("Distance(mm): %s" % (self.distanceMM))
@@ -32,7 +36,7 @@ class DistanceSensor4M:
 
     def get_distance_meters(self):
         self.get_distance_millimeters()
-        distanceM = self.distanceMM * 10
+        distanceM = self.distanceMM * 100
         return distanceM
 
 
@@ -49,9 +53,9 @@ class DistanceSensor4M:
 
 
     def display_distance(self, clue_display):
-        clue_display[13].text = "Distance sensor"
-        clue_display[14].text = "Millimeters: {:.2f}".format(self.distanceMM)
-        clue_display[15].text = "Feet: {:.2f}".format(self.get_distance_feet())
+        clue_display[11].text = "Distance sensor"
+        clue_display[12].text = "Millimeters: {:.2f}".format(self.distanceMM)
+        clue_display[13].text = "Feet: {:.2f}".format(self.get_distance_feet())
 
         clue_display.show()
 

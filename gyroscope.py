@@ -16,10 +16,10 @@ class Gyroscope:
 
 
     def display_ang_vel_values(self, clue_display):
-        clue_display[7].text = "Gyroscope: angular velocity"
-        clue_display[8].text = "X: {:.2f}".format(self.x)
-        clue_display[9].text = "Y: {:.2f}".format(self.y)
-        clue_display[10].text = "Z: {:.2f}".format(self.z)
+        clue_display[6].text = "Gyroscope: angular velocity"
+        clue_display[7].text = "X: {:.2f}".format(self.x)
+        clue_display[8].text = "Y: {:.2f}".format(self.y)
+        clue_display[9].text = "Z: {:.2f}".format(self.z)
 
         clue_display.show()
 
