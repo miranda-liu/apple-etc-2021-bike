@@ -13,41 +13,35 @@ from adafruit_clue import clue
         # Bluetooth?
         # Wires?
 
-# accelerometer (on board) (back of bike)
+# accelerometer (on board) (back of bike) (M)
     # sense when there is a sudden change in speed --> sends signal for brake lights to breadboard on back of bike
     # in conjunction with gyroscope, sense collisions/falls
-x, y, z = clue.acceleration
-menu_screen = board.DISPLAY
-acceleration_label = label.Label(terminalio.FONT, text="x,y,x", scale=1, color=0x000000)
-menu_screen.append(acceleration_label)
-# - always need a loop function
-# if x > value: (2g's of force):
 
 
 
-# gyroscope (on board) (back of bike)
+# gyroscope (on board) (back of bike) (M)
     # sense when there is a sudden change in rotation --> sense collision (in conjunction with accelerometer)
     # sends signal to alert biker (phone, sounds from the board, maybe use the lights as well, or the screen of the Clue board)
 
 
 
-# distance sensor (4m, off board) (back of bike)
+# distance sensor (4m, off board) (back of bike) (M)
     # sense an approaching object --> when the approaching object passes a certain threshold --> sends signal for some type of alert for the biker
     # sends signal to alert biker (phone, sounds from the board, maybe use the lights as well, or the screen of the Clue board)
 
 
 
-# LIDAR sensor (on board) (back of bike)
+# LIDAR sensor (on board) (back of bike) (L)
     # use it to back up the distance sensor
 
 
 
-# button A/B (on board) (front of bike)
+# button A/B (on board) (front of bike) (L)
     # sense user input for R/L turn signals --> sends signal for turn signal to breadboard on back of bike
 
 
 
-# capacitive touch slider (off board) (front of bike)
+# capacitive touch slider (off board) (front of bike) (L)
     # sense user input for R/L turn signals --> sends signal for turn signal to breadboard on back of bike
 
 
