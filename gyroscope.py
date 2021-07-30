@@ -10,6 +10,8 @@ class Gyroscope:
     y = 0
     z = 0
 
+    # alert
+    gyroscope_alert = False
 
     def get_ang_vel(self):
         self.x, self.y, self.z = clue.gyro
@@ -26,6 +28,7 @@ class Gyroscope:
 
     def collision_gyroscope(self):
         if self.x > 18:
-            clue_display[11].text = "Impact detected"
-        else:
-            clue_display[11].text = "No impact"
+            # clue_display[11].text = "Impact detected"
+            gyroscope_alert = True
+        # else:
+            # clue_display[11].text = "No impact"

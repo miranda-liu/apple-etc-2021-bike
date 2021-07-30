@@ -25,8 +25,12 @@ while True:
     dist.get_distance_millimeters()
     dist.display_distance(clue_display)
 
-    twi.twist_sensor()
+    # twi.twist_sensor()
+    # twi.twist_sensor_init()
+    twi.detect_twist_direction()
     twi.display_twist_sensor(clue_display)
+    # twi.twist_reset()
+    # twi.twist_sensor()
 
 
 

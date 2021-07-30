@@ -14,6 +14,8 @@ class Accelerometer:
     y = 0
     z = 0
 
+    # alert
+    acceleration_alert = False
 
     def get_acceleration(self):
         self.x, self.y, self.z = clue.acceleration
@@ -30,6 +32,7 @@ class Accelerometer:
 
     def collision_acceleration(self):
         if self.x > 18:
-            clue_display[5].text = "Impact detected"
-        else:
-            clue_display[5].text = "No impact"
+            # clue_display[5].text = "Impact detected"
+            acceleration_alert = True
+        # else:
+            # clue_display[5].text = "No impact"
