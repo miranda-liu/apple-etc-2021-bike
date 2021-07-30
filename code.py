@@ -1,19 +1,25 @@
 import board
 import displayio
+# from lib.adafruit_clue import clue
 from adafruit_clue import clue
 from accelerometer import Accelerometer
 from gyroscope import Gyroscope
 from distance_sensor_4m import DistanceSensor4M
-from twist_sensor import TwistSensor
-# from button import Button
+# from twist_sensor import TwistSensor
+from touch_sensor import TouchSensor
+from Haptic_sensor import HapticSensor
+import time
 
 clue_display = clue.simple_text_display(text_scale=1, colors=(clue.WHITE,))
 accel = Accelerometer()
 gyro = Gyroscope()
 dist = DistanceSensor4M()
-twi = TwistSensor()
+# twi = TwistSensor()
+touch = TouchSensor()
+haptic = HapticSensor()
 # clue_button = Button()
 
+# haptic.test()
 
 while True:
     accel.get_acceleration()
@@ -25,12 +31,14 @@ while True:
     dist.get_distance_millimeters()
     dist.display_distance(clue_display)
 
-    # twi.twist_sensor()
-    # twi.twist_sensor_init()
-    twi.detect_twist_direction()
-    twi.display_twist_sensor(clue_display)
-    # twi.twist_reset()
-    # twi.twist_sensor()
+    # twi.detect_twist_direction()
+    # twi.display_twist_sensor(clue_display)
+
+    touch.display_button_states(clue_display)
+
+    haptic.trigger_pulse()
+    # time.sleep(1)
+    
 
 
 

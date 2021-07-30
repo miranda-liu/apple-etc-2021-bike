@@ -23,9 +23,9 @@ class Accelerometer:
 
     def display_acceleration_values(self, clue_display):
         clue_display[0].text = "Acceleration"
-        clue_display[2].text = "X: {:.2f}".format(self.x)
-        clue_display[3].text = "Y: {:.2f}".format(self.y)
-        clue_display[4].text = "Z: {:.2f}".format(self.z)
+        clue_display[1].text = "X: {:.2f}".format(self.x)
+        clue_display[2].text = "Y: {:.2f}".format(self.y)
+        clue_display[3].text = "Z: {:.2f}".format(self.z)
 
         clue_display.show()
 

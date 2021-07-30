@@ -204,7 +204,7 @@ class CamperGame:
         if self.urgent and self.time_label.background_color == 0x000000:
             self.time_label.background_color = 0xDD0000
         elif self.time_label.background_color != 0x000000:
-            self.time_label.background_color = 0x000000
+            self.time_label.background_color = 0x9A8DD2
         self.display.refresh()
 
     # Sends the current game variables over Bluetooth.
@@ -384,7 +384,7 @@ class GameSuccess(CamperGame.State):
             clue.play_tone(1400, 0.3) # F
         else:
             time.sleep(0.1)
-        machine.action_label.background_color = 0x000000 # black (0, 0, 0)
+        machine.action_label.background_color = 0x9A8DD2 # black (0, 0, 0)
 
     def exit(self, machine):
         super().exit(machine)

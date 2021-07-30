@@ -21,24 +21,25 @@ class TwistSensor:
 
 
     def display_twist_sensor(self, clue_display):
-        clue_display[15].text = "Twist sensor"
-        clue_display[16].text = "Twist count: {:}".format(self.twist.count)
+        clue_display[14].text = "Twist sensor"
+        clue_display[15].text = "Twist count: {:}".format(self.twist.count)
         clue_display.show()
 
 
     def detect_twist_direction(self):
-        if self.twist.count > 5:
-            print("twisted right")
-            self.twist.count = 0
-            self.change_color_red()
-            time.sleep(5)
-            self.change_color_reset()
-        elif self.twist.count< -5:
-            print("twisted left")
-            self.twist.count = 0
-            self.change_color_green()
-            time.sleep(5)
-            self.change_color_reset()
+        self.twist.set_color(0, 0, 0)
+        # if self.twist.count > 5:
+        #     print("twisted right")
+        #     self.twist.count = 0
+        #     self.change_color_red()
+        #     time.sleep(5)
+        #     self.change_color_reset()
+        # elif self.twist.count< -5:
+        #     print("twisted left")
+        #     self.twist.count = 0
+        #     self.change_color_green()
+        #     time.sleep(5)
+        #     self.change_color_reset()
 
     def change_color_red(self):
         self.twist.set_color(230, 32, 25)

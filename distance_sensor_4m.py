@@ -53,9 +53,9 @@ class DistanceSensor4M:
 
 
     def display_distance(self, clue_display):
-        clue_display[11].text = "Distance sensor"
-        clue_display[12].text = "Millimeters: {:.2f}".format(self.distanceMM)
-        clue_display[13].text = "Feet: {:.2f}".format(self.get_distance_feet())
+        clue_display[10].text = "Distance sensor"
+        clue_display[11].text = "Millimeters: {:.2f}".format(self.distanceMM)
+        clue_display[12].text = "Feet: {:.2f}".format(self.get_distance_feet())
 
         clue_display.show()
 
