@@ -10,9 +10,9 @@ class Sparkfun_Haptic:
 
     def __init__(self, i2c, address=QWIIC_TWIST_ADDR, debug=False):
         """Initialize Qwiic Twist for i2c communication."""
-        print("Searching for haptic")
+        # print("Searching for haptic")
         self._device = I2CDevice(i2c, address)
-        print("Found Haptic")
+        # print("Found Haptic")
         #save handle to i2c bus in case address is changed
         self._i2c = i2c
         self._debug = debug
@@ -25,9 +25,9 @@ class Sparkfun_Haptic:
     #0-127
     def setVib(self, vib):
         if vib < 0:
-            return False; 
+            return False;
         if vib > 127:
-            return False; 
+            return False;
         self._write_register8(0x23, vib)
 
 

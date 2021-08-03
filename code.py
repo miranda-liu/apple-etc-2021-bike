@@ -1,48 +1,142 @@
 import board
 import displayio
-# from lib.adafruit_clue import clue
 from adafruit_clue import clue
 from accelerometer import Accelerometer
 from gyroscope import Gyroscope
 from distance_sensor_4m import DistanceSensor4M
-# from twist_sensor import TwistSensor
-from touch_sensor import TouchSensor
-from Haptic_sensor import HapticSensor
+from twist_sensor import TwistSensor
+from haptic_sensor import HapticSensor
+from led import LED
 import time
+import digitalio
+# from button import Button
+
 
 clue_display = clue.simple_text_display(text_scale=1, colors=(clue.WHITE,))
 accel = Accelerometer()
 gyro = Gyroscope()
 dist = DistanceSensor4M()
-# twi = TwistSensor()
-touch = TouchSensor()
-haptic = HapticSensor()
+twi = TwistSensor()
 # clue_button = Button()
+hap = HapticSensor()
 
-# haptic.test()
+
+light_red_brake = LED()
+light_yellow_left = LED()
+light_yellow_right = LED()
+
+
+light_red_brake = digitalio.DigitalInOut(board.P0)
+light_red_brake.direction = digitalio.Direction.OUTPUT
+light_red_brake.value = False
+
+light_yellow_right = digitalio.DigitalInOut(board.P3)
+light_yellow_right.direction = digitalio.Direction.OUTPUT
+light_yellow_left.value = False
+
+light_yellow_left = digitalio.DigitalInOut(board.P7)
+light_yellow_left.direction = digitalio.Direction.OUTPUT
+light_yellow_left.value = False
 
 while True:
+    # hap.trigger_pulse()
+    dist.check_distance()
     accel.get_acceleration()
     accel.display_acceleration_values(clue_display)
-
     gyro.get_ang_vel()
     gyro.display_ang_vel_values(clue_display)
-
     dist.get_distance_millimeters()
     dist.display_distance(clue_display)
-
-    # twi.detect_twist_direction()
-    # twi.display_twist_sensor(clue_display)
-
-    touch.display_button_states(clue_display)
-
-    haptic.trigger_pulse()
-    # time.sleep(1)
-    
+    # twi.twist_sensor()
+    # twi.twist_sensor_init()
+    twi.detect_twist_direction()
+    twi.display_twist_sensor(clue_display)
+    # twi.twist_reset()
+    # twi.twist_sensor()
 
 
+    if accel.x > 2 or accel.x < -2:
+        light_red_brake.value = True
+        time.sleep(2)
+        light_red_brake.value = False
+    if twi.twist_direction == "left":
+        light_yellow_left.value = True
+        time.sleep(2)
+        light_yellow_left.value = False
+        twi.twist_direction = "none"
+    if twi.twist_direction == "right":
+        light_yellow_right.value = True
+        time.sleep(2)
+        light_yellow_right.value = False
+        twi.twist_direction = "none"
 
 
+
+"""light1 = LED()
+light2 = LED()
+
+light1 = digitalio.DigitalInOut(board.P0)
+light1.direction = digitalio.Direction.OUTPUT
+
+light2 = digitalio.DigitalInOut(board.P1)
+light2.direction = digitalio.Direction.OUTPUT
+
+light3 = digitalio.DigitalInOut(board.P7)
+light3.direction = digitalio.Direction.OUTPUT
+
+while True:
+    # light.turn_on(board.P0)
+    light1.value = True
+    time.sleep(2)
+    # light.turn_off(board.P0)
+    light1.value = False
+    time.sleep(2)
+
+    light2.value = True
+    time.sleep(1)
+    light2.value = False
+    time.sleep(2)
+
+    light3.value = True
+    time.sleep(1)
+    light3.value = False
+    time.sleep(2)
+"""
+"""
+import microcontroller
+import board
+import digitalio
+import time
+a_button = digitalio.DigitalInOut(board.BUTTON_A)
+a_button.direction = digitalio.Direction.INPUT
+flashlight = digitalio.DigitalInOut(board.WHITE_LEDS)
+flashlight.direction = digitalio.Direction.OUTPUT
+switch = digitalio.DigitalInOut(board.D0)
+switch.direction = digitalio.Direction.OUTPUT
+while True:
+    switch.value = True
+    time.sleep(1)
+
+
+import microcontroller
+import board
+import digitalio
+import time
+a_button = digitalio.DigitalInOut(board.BUTTON_A)
+a_button.direction = digitalio.Direction.INPUT
+flashlight = digitalio.DigitalInOut(board.WHITE_LEDS)
+flashlight.direction = digitalio.Direction.OUTPUT
+switch = digitalio.DigitalInOut(board.D0)
+switch.direction = digitalio.Direction.OUTPUT
+while True:
+    if a_button.value:
+        flashlight.value = False
+        switch.value = False
+    else:
+        flashlight.value = True
+        switch.value = True
+    time.sleep(1)
+"""
 
 
 
