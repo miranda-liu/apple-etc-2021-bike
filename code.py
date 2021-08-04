@@ -9,7 +9,6 @@ from haptic_sensor import HapticSensor
 from led import LED
 import time
 import digitalio
-# from button import Button
 
 
 clue_display = clue.simple_text_display(text_scale=1, colors=(clue.WHITE,))
@@ -17,6 +16,7 @@ accel = Accelerometer()
 gyro = Gyroscope()
 dist = DistanceSensor4M()
 twi = TwistSensor()
+twi.twist_sensor_init()
 # clue_button = Button()
 hap = HapticSensor()
 
@@ -39,26 +39,60 @@ light_yellow_left.direction = digitalio.Direction.OUTPUT
 light_yellow_left.value = False
 
 while True:
+    twi.detect_pressed()
+
+    #twi.detect_pressed()
+    #twi.display_twist_sensor(clue_display)
+    # twi.twist_reset()
+    # twi.twist_sensor()
+
     # hap.trigger_pulse()
-    dist.check_distance()
+        # dist.check_distance()
     accel.get_acceleration()
-    accel.display_acceleration_values(clue_display)
+    # print("accel: x" + str(accel.x))
+    # print("accel: y" + str(accel.y))
+    # print("accel: z" + str(accel.z))
+    # print("")
+
+        # accel.display_acceleration_values(clue_display)
+
     gyro.get_ang_vel()
-    gyro.display_ang_vel_values(clue_display)
+        # gyro.display_ang_vel_values(clue_display)
     dist.get_distance_millimeters()
-    dist.display_distance(clue_display)
+        # dist.display_distance(clue_display)
     # twi.twist_sensor()
     # twi.twist_sensor_init()
     twi.detect_twist_direction()
-    twi.display_twist_sensor(clue_display)
+    twi.detect_pressed()
+    # twi.detect_clicked()
+    # twi.display_twist_sensor(clue_display)
     # twi.twist_reset()
     # twi.twist_sensor()
 
 
-    if accel.x > 2 or accel.x < -2:
+    # if accel.x > 2 or accel.x < -2:
+       #  light_red_brake.value = True
+        # time.sleep(2)
+        # light_red_brake.value = False
+
+    if twi.twist_sensor_pressed == True:
+        print("pressed")
         light_red_brake.value = True
         time.sleep(2)
         light_red_brake.value = False
+         #print("Pressed")
+        twi.twist_sensor_pressed = False
+
+    """
+    if twi.twist_sensor_clicked== True:
+        print("click")
+        light_red_brake.value = True
+        time.sleep(2)
+        light_red_brake.value = False
+         #print("Pressed")
+        twi.twist_sensor_clicked = False
+    """
+
     if twi.twist_direction == "left":
         light_yellow_left.value = True
         time.sleep(2)

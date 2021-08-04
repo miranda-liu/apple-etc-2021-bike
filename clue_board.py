@@ -28,7 +28,7 @@ class CBoard():
         #if dist.get_distance_feet() < 1:
         buzzer.duty_cycle = SPEAKER_ON
         self.play_sounds()
-        time.sleep(5)
+        time.sleep(2)
         buzzer.duty_cycle = SPEAKER_OFF
 
 

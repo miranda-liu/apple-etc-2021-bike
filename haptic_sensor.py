@@ -15,6 +15,12 @@ class HapticSensor:
 
     def trigger_pulse(self):
         self.haptic.setVib(127)
-        time.sleep(.01)
+        time.sleep(1)
         self.haptic.setVib(0)
         # print("Pulsed")
+
+    def haptic_on(self):
+        self.haptic.setVib(127)
+
+    def haptic_off(self):
+        self.haptic.setVib(0)

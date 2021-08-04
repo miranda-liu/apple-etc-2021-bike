@@ -6,14 +6,12 @@ from haptic_sensor import HapticSensor
 from twist_sensor import TwistSensor
 from clue_board import CBoard
 from accelerometer import Accelerometer
-# from led import LED
 
 
 hap = HapticSensor()
 twi = TwistSensor()
 cboard = CBoard()
 accel = Accelerometer()
-# light = LED()
 
 
 class DistanceSensor4M:
@@ -73,14 +71,30 @@ class DistanceSensor4M:
         clue_display.show()
 
     def check_distance(self):
-        if self.get_distance_feet() < 1 and self.get_distance_inches() > 6:
-            for i in range(3):
-                twi.flash_color_blue()
-                # cboard.close_enough()
-        if self.get_distance_inches() < 6:
-          #  hap.trigger_pulse()
+        if self.get_distance_feet() <= 6:
+            # for i in range(3):
+            twi.change_color_blue()
             # cboard.close_enough()
-            print("yay")
+            # hap.trigger_pulse()
+            hap.haptic_on()
+            time.sleep(1.5)
+            twi.change_color_red()
+            hap.haptic_off()
+            time.sleep(0.5)
+            twi.change_color_blue()
+            twi.change_color_reset()
+        elif self.get_distance_feet() > 6 and self.get_distance_feet() <= 12:
+          #  hap.trigger_pulse()
+            # twi.change_color_orange()
+            # cboard.close_enough()
+            # hap.trigger_pulse()
+            hap.haptic_on()
+            time.sleep(0.5)
+            # twi.change_color_green()
+            hap.haptic_off()
+            time.sleep(0.2)
+            # twi.change_color_orange()
+            # twi.change_color_reset()
 
 """
     def configure_LEDs(self):
