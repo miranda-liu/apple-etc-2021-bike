@@ -47,7 +47,7 @@ while True:
     # twi.twist_sensor()
 
     # hap.trigger_pulse()
-        # dist.check_distance()
+    dist.check_distance()
     accel.get_acceleration()
     # print("accel: x" + str(accel.x))
     # print("accel: y" + str(accel.y))
@@ -75,8 +75,12 @@ while True:
         # time.sleep(2)
         # light_red_brake.value = False
 
-    if twi.twist_sensor_pressed == True:
+    if twi.twist_sensor_pressed == True or twi.turn_on_red_brake_lights() == True:
         print("pressed")
+        light_red_brake.value = True
+        time.sleep(2)
+        light_red_brake.value = False
+        time.sleep(2)
         light_red_brake.value = True
         time.sleep(2)
         light_red_brake.value = False
@@ -97,8 +101,17 @@ while True:
         light_yellow_left.value = True
         time.sleep(2)
         light_yellow_left.value = False
+        time.sleep(2)
+        light_yellow_left.value = True
+        time.sleep(2)
+        light_yellow_left.value = False
         twi.twist_direction = "none"
+
     if twi.twist_direction == "right":
+        light_yellow_right.value = True
+        time.sleep(2)
+        light_yellow_right.value = False
+        time.sleep(2)
         light_yellow_right.value = True
         time.sleep(2)
         light_yellow_right.value = False

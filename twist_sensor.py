@@ -33,21 +33,30 @@ class TwistSensor:
 
 
     def detect_twist_direction(self):
-        if self.twist.count > 5:
+        if self.twist.count > 2 and self.twist.count < 10:
             print("twisted right")
             self.twist.count = 0
             self.change_color_red()
-            time.sleep(0.5)
+            time.sleep(0.7)
             self.change_color_reset()
             self.twist_direction = "right"
 
-        elif self.twist.count< -5:
+        elif self.twist.count< -2 and self.twist.count >-10:
             print("twisted left")
             self.twist.count = 0
             self.change_color_green()
-            time.sleep(0.5)
+            time.sleep(0.7)
             self.change_color_reset()
             self.twist_direction = "left"
+
+    def turn_on_red_brake_lights(self):
+        if self.twist.count >= 10:
+            # print("pressed v2")
+            self.twist.count = 0
+            self.change_color_blue()
+            time.sleep(0.7)
+            self.change_color_reset()
+            return True
 
 
     def change_color_red(self):
@@ -78,7 +87,6 @@ class TwistSensor:
             self.change_color_blue()
             time.sleep(0.5)
             self.change_color_reset()
-            return True
 
 
     def detect_clicked(self):
